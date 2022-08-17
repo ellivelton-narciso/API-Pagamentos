@@ -1,3 +1,4 @@
+/*
 $.ajax({
     url: "https://api.mercadopago.com/checkout/preferences",
     method: "POST",
@@ -47,4 +48,22 @@ $.ajax({
     success: function (res){
         console.log(res)
     }
-});
+});*/
+
+$('#procurarPersonagem').click(()=>{
+    $('.is-invalid').removeClass('is-invalid')
+    if($('#nomePersonagem').val() == '') {
+        $('#nomePersonagem').addClass('is-invalid')
+    } if($('#nomePersonagem').val().split('_').length !== 2) {
+        const alertaNomeErrado = `<div class="mt-lg-3 col-lg-8 alert alert-danger alert-dismissible fade show" role="alert">
+            O nome deve estar no formato Nome_Sobrenome
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`
+        $(alertaNomeErrado).clone().appendTo('#campoInput')
+    } else if(!$('#nomePersonagem').hasClass('is-invalid')) {
+        const nomePersonagem = $('#nomePersonagem').val()
+        let personagem = []
+
+    }
+
+})
