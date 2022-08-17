@@ -9,6 +9,6 @@ import (
 func HandleRequests() {
 	config.ReadFile()
 	r := gin.Default()
-	r.GET("/pagamentos", controllers.CheckPayment)
+	r.POST("/usuario", controllers.CheckUser)
 	r.Run(":" + config.PortaRodando)
 }
