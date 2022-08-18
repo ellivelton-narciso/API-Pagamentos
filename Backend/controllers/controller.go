@@ -53,3 +53,8 @@ func CheckUser(c *gin.Context) {
 	})
 
 }
+
+func ValidBought(c *gin.Context) {
+	database.DBCon()
+
+}

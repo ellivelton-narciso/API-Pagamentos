@@ -15,6 +15,7 @@ var (
 	Pass              string
 	PortaRodando      string
 	TabelaPersonagens string
+	TokenMercadoPago  string
 	Config            *models.ConfigStruct
 )
 
@@ -34,5 +35,6 @@ func ReadFile() {
 	User = Config.User
 	Pass = Config.Pass
 	PortaRodando = Config.PortaRodando
+	TokenMercadoPago = Config.TokenMercadoPago
 	TabelaPersonagens = Config.TabelaPersonagens
 }
