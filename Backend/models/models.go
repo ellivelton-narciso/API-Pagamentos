@@ -28,10 +28,8 @@ type Login struct {
 }
 
 type CompraFeita struct {
-	Id         int    `json:"id"`
-	Produto    string `json:"produto"`
-	Token      string `json:"token"`
-	Quantidade int    `json:"quantidade"`
+	Id      int    `json:"id"`
+	Produto string `json:"produto"`
 }
 
 type ResponseVerifica struct {
