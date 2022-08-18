@@ -1,13 +1,13 @@
 package models
 
 type Personagem struct {
-	Id            int    `json:"id"`
-	Nome          string `json:"nome"`
-	TokenMp       string `json:"tokenMp"`
-	Vip           int    `json:"vip"`
-	DiasRestantes int    `json:"dias_restantes"`
-	Coins         int    `json:"coins"`
-	Token         string `json:"token"`
+	Id      int    `json:"id"`
+	Nome    string `json:"nome"`
+	Produto string `json:"produto"`
+	Vip     int    `json:"vip"`
+	DiasVip int    `json:"diasvip"`
+	Coins   int    `json:"coins"`
+	Token   string `json:"token"`
 }
 
 type ConfigStruct struct {

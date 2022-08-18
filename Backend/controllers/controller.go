@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
+	"net/http"
 )
 
 func CheckUser(c *gin.Context) {
@@ -15,7 +16,7 @@ func CheckUser(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&p)
 	if err != nil {
-		c.JSON(400, gin.H{
+		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Parametro não pode ser vinculado a um JSON: " + err.Error(),
 		})
 		return
@@ -36,7 +37,7 @@ func CheckUser(c *gin.Context) {
 
 	token, err := services.NewJWTService().GenerateToken(uint(personagem.Id))
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
 	}
@@ -46,6 +47,9 @@ func CheckUser(c *gin.Context) {
 		fmt.Println("\n login80 - ", err)
 		//log.Fatal(err)
 	}
-	c.JSON(200, token)
+	c.JSON(http.StatusOK, gin.H{
+		"id":    personagem.Id,
+		"token": token,
+	})
 
 }
