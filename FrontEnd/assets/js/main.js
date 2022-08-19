@@ -1,55 +1,3 @@
-/*
-$.ajax({
-    url: "https://api.mercadopago.com/checkout/preferences",
-    method: "POST",
-    headers: {
-        "Authorization": "Bearer ",
-        "Content-Type": "application/json"
-    },
-    data: JSON.stringify({
-        "items": [
-            {
-                "id": "produto1",
-                "title": "Meu produto",
-                "quantity": 1,
-                "unit_price": 75.76
-            }
-        ],
-        "payer": {
-            "first_name": "Test",
-            "last_name": "Test",
-            "phone": {
-                "area_code": 11,
-                "number": "987654321"
-            },
-            "address": {}
-        }
-    }),
-    beforeSend: function() {
-
-    },
-    success: function (res){
-        console.log(res)
-    },
-    error: function () {
-
-    }
-});
-
-
-$.ajax({
-    url: "https://api.mercadopago.com/v1/payments/search?sort=date_created&criteria=desc",
-    method: "GET",
-    timeout: 0,
-    headers: {
-        "Authorization": "Bearer ",
-        "Content-Type": "application/json"
-    }
-    success: function (res){
-        console.log(res)
-    }
-});*/
-
 $('#enviarNome').click(()=>{
     const nomePersonagem = $('#nomePersonagem').val()
     $('.is-invalid').removeClass('is-invalid')
@@ -74,19 +22,23 @@ $('#enviarNome').click(()=>{
 
             },
             success: function (res) {
-                /*const res = {
-                    "id": 2,
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdW0iOjIsImV4cCI6MTY2MDgwODE1MywiaWF0IjoxNjYwODAwOTUzLCJpc3MiOiJib29rLWFwaSJ9.OdvMhrzf1NYXKdeao3wJbNn6kQONspcg6rRg7tQp9SU"
-                }*/
-                const verificaLS = localStorage.usuario;
-                const token = res.token;
-                const usuario = JSON.stringify(res)
-                let data = new Date()
-                data.setTime(data.getTime()+(2*60*60*1000))
-                let expires = data.toGMTString()
-                document.cookie = "tk="+ token +"; expires="+expires+""
-                localStorage.usuario = usuario;
-                location.assign("produtos.html")
+                if(res.id === 0) {
+                    const alertaNomeErrado = `<div class="mt-lg-3 col-lg-8 alert alert-danger alert-dismissible fade show" role="alert">
+                        Usuario não encontrado no banco de dados.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`
+                    $(alertaNomeErrado).clone().appendTo('#campoInput')
+                } else {
+                    const verificaLS = localStorage.usuario;
+                    const token = res.token;
+                    const usuario = JSON.stringify(res)
+                    let data = new Date()
+                    data.setTime(data.getTime()+(2*60*60*1000))
+                    let expires = data.toGMTString()
+                    document.cookie = "tk="+ token +"; expires="+expires+""
+                    localStorage.usuario = usuario;
+                    location.assign("produtos.html")
+                }
             }
         })
     }

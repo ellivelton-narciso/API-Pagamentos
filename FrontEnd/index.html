@@ -1,6 +1,23 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
+    <script>
+        function getCookie(k) {
+            const cookies = " " + document.cookie;
+            const token = " " + k + "=";
+            const start = cookies.indexOf(token);
+
+            if (start === -1) return null;
+
+            const pos = start + token.length;
+            const last = cookies.indexOf(";", pos);
+
+            if (last !== -1) return cookies.substring(pos, last);
+
+            return cookies.substring(pos);
+        }
+        function verificaLogado() {const usuario = localStorage.getItem('usuario'); if (usuario !== null && getCookie('tk') === JSON.parse(usuario).token) return location.assign("produtos.html")} verificaLogado()
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -9,19 +26,26 @@
     <link rel="stylesheet" href="vendor/Bootstrap5/css/bootstrap.min.css">
 </head>
 <body>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-lg d-flex justify-content-end">
+        <li class="text-decoration-none list-unstyled">
+            <a class="navbar-brand" href="#">Entrar</a>
+        </li>
+    </div>
+</nav>
 <div class="container-lg">
-    <div class="row d-flex justify-content-lg-center" style="margin-top: 27vh">
+    <div class="row d-flex justify-content-lg-center" style="margin-top: 17vh">
         <div class="col-lg-6">
             <div class="card">
-                <div id="campoInput" class="row mt-lg-5 mb-lg-3 d-flex justify-content-lg-center">
+                <div id="campoInput" class="row mt-lg-5 mb-lg-5 d-flex justify-content-lg-center">
                     <div class="col-lg-10">
                         <label for="nomePersonagem"></label>
                         <input type="text" id="nomePersonagem" class="form-control text-center" placeholder="Nome do Personagem (Nome_Sobrenome)">
                     </div>
-                </div>
-                <div class="row mb-lg-5 d-flex justify-content-lg-center">
-                    <div class="col-lg-3">
-                        <button id="enviarNome" class="btn btn-success">Entrar</button>
+                    <div class="col-lg-1 mt-lg-4">
+                        <div class="col-lg-3">
+                            <button id="enviarNome" class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,4 +58,5 @@
 
 <script src="vendor/Jquery/jquery-3.6.0.min.js"></script>
 <script src="vendor/Bootstrap5/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/08478c52c1.js" crossorigin="anonymous"></script>
 <script src="assets/js/main.js"></script>
