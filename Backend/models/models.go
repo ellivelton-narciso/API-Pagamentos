@@ -20,6 +20,11 @@ type ConfigStruct struct {
 	TabelaPersonagens string `json:"TabelaPersonagens"`
 	TokenMercadoPago  string `json:"TokenMercadoPago"`
 }
+type ValidaUser struct {
+	Id    string `json:"id"`
+	Nome  string `json:"nome"`
+	Token string `json:"token"`
+}
 
 type Login struct {
 	Nome string `json:"nome"`

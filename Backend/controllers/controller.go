@@ -12,7 +12,6 @@ import (
 )
 
 func CheckUser(c *gin.Context) {
-	database.DBCon()
 	var p models.Login
 
 	err := c.ShouldBindJSON(&p)
@@ -46,7 +45,7 @@ func CheckUser(c *gin.Context) {
 	_, err = database.DB.Queryx(qryUpdateToken, token, personagem.Id)
 	if err != nil {
 		fmt.Println("\n login80 - ", err)
-		//log.Fatal(err)
+		log.Fatal(err)
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"id":    personagem.Id,
@@ -56,24 +55,25 @@ func CheckUser(c *gin.Context) {
 }
 
 func ValidBought(c *gin.Context) {
-	database.DBCon()
-
-	var cf models.CompraFeita
-	err := c.ShouldBindJSON(&cf)
+	token := services.TokenBearer(c.GetHeader("Authorization"))
+	fmt.Println(token)
+	perfilToken := models.CompraFeita{}
+	err := c.ShouldBindJSON(&perfilToken)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Parametro não pode ser vinculado a um JSON: " + err.Error(),
 		})
 		return
 	}
-	qry := "UPDATE personagens SET produto = ? WHERE id = ?"
-	rows, err := database.DB.Queryx(qry, cf.Produto, cf.Id)
+	qry := "UPDATE " + config.TabelaPersonagens + " SET produto = ? WHERE id = ?"
+	rows, err := database.DB.Queryx(qry, perfilToken.Produto, perfilToken.Id)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	config.ReadFile()
 	personagem := models.Personagem{}
+
 	for rows.Next() {
 		err = rows.StructScan(&personagem)
 	}
@@ -84,4 +84,5 @@ func ValidBought(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"token": config.TokenMercadoPago,
 	})
+
 }

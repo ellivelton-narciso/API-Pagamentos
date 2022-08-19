@@ -1,7 +1,12 @@
 package main
 
-import "api_pagamentos/routes"
+import (
+	"api_pagamentos/database"
+	"api_pagamentos/server"
+)
 
 func main() {
-	routes.HandleRequests()
+	database.DBCon()
+	s := server.NewServer()
+	s.Run()
 }

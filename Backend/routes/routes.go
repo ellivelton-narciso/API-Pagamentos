@@ -1,15 +1,21 @@
 package routes
 
 import (
-	"api_pagamentos/config"
 	"api_pagamentos/controllers"
+	middleware "api_pagamentos/midleware"
 	"github.com/gin-gonic/gin"
 )
 
-func HandleRequests() {
-	config.ReadFile()
-	r := gin.Default()
-	r.POST("/usuario", controllers.CheckUser)
-	r.POST("/compraFeita", controllers.ValidBought)
-	r.Run(":" + config.PortaRodando)
+func ConfigRoutes(router *gin.Engine) *gin.Engine {
+
+	main := router.Group("/")
+	{
+		logado := router.Group("/s", middleware.Auth())
+		{
+			logado.POST("compraFeita", controllers.ValidBought)
+		}
+
+		main.POST("/usuario", controllers.CheckUser)
+	}
+	return router
 }
