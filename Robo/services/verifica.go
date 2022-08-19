@@ -140,8 +140,10 @@ func VerificaProdutos() {
 						}
 					} else if goterators.Exist(arrDes, "coins") || goterators.Exist(arrDes, "Coins") || goterators.Exist(arrDes, "COINS") {
 
-						var qryAddCoins = "UPDATE " + config.TabelaPersonagens + " SET coins = 1, produto = '' WHERE  id = ?"
-						_, err = database.DB.Queryx(qryAddCoins, idCliente)
+						amount := s.TransactionDetails.TotalPaidAmount * config.Coins
+
+						var qryAddCoins = "UPDATE " + config.TabelaPersonagens + " SET coins = ?, produto = '' WHERE  id = ?"
+						_, err = database.DB.Queryx(qryAddCoins, amount, idCliente)
 						if err != nil {
 							log.Fatal(err)
 						}

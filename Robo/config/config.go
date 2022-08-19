@@ -17,6 +17,7 @@ var (
 	TabelaPersonagens string
 	TokenMercadoPago  string
 	MinutosRodando    time.Duration
+	Coins             float64
 	Config            *models.ConfigStruct
 )
 
@@ -38,4 +39,5 @@ func ReadFile() {
 	TokenMercadoPago = Config.TokenMercadoPago
 	TabelaPersonagens = Config.TabelaPersonagens
 	MinutosRodando = Config.MinutosRodando
+	Coins = Config.Coins
 }

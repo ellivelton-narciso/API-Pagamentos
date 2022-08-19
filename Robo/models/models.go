@@ -21,6 +21,7 @@ type ConfigStruct struct {
 	TabelaPersonagens string        `json:"TabelaPersonagens"`
 	TokenMercadoPago  string        `json:"TokenMercadoPago"`
 	MinutosRodando    time.Duration `json:"MinutosRodando"`
+	Coins             float64       `json:"Coins"`
 }
 
 type Login struct {
