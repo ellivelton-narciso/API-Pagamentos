@@ -184,7 +184,8 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
                                 "number": ""
                             },
                             "address": {}
-                        }
+                        },
+                        "externel_reference": idProduto+"-"+idCliente
                     }),
                     success: function (res){
                         location.assign(res.init_point)
