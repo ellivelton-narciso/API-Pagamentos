@@ -5,7 +5,6 @@ import (
 	"api_pagamentos/database"
 	"api_pagamentos/models"
 	"api_pagamentos/services"
-	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -72,7 +71,6 @@ func ValidBought(c *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(json.Marshal(rows))
 
 	config.ReadFile()
 	personagem := models.Personagem{}
