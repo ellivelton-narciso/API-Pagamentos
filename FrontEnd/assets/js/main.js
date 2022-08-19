@@ -69,7 +69,7 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
     text-decoration: none;
 }
     </style>
-    <div id="`+ idProduto +`-`+ idProduto +`" class="col-lg-3 cardProduto">
+    <div id="`+ idProduto +`-`+ idProduto +`" class="col-lg-3 cardProduto mb-lg-5">
         <div class="card" id="carProduto_titulos-`+ idProduto +`" style="background-color: #818181; color: #ffffff; border: none">
           <div class="row" style="padding: 30px 20px">
             <h5 class="tituloProduto" style="font-size: 0.8rem">`+ nomeProduto +`</h5>
@@ -154,6 +154,9 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
 }
 
 geraProduto('coins', 'Coins', '1', []);
+geraProduto('coins100', 'Coins', '100', []);
+geraProduto('coins1000', 'Coins', '1000', []);
+geraProduto('coins10000', 'Coins', '10000', []);
 geraProduto('vipBronze', 'Vip Bronze', '10,00', ['30 dias de vip', 'Tag no Discord de Vip', 'Tag Vip no servidor', '10 coins', '+1 veículo no inventário'])
 geraProduto('vipPrata', 'Vip Prata', '20,00', ['30 dias de vip', 'Tag no Discord de Vip', 'Tag Vip no servidor', '20 coins', '+2 veículo no inventário'])
 geraProduto('vipOuro', 'Vip Ouro', '30,00', ['30 dias de vip', 'Tag no Discord de Vip', 'Tag Vip no servidor', '40 coins', '+4 veículo no inventário'])
