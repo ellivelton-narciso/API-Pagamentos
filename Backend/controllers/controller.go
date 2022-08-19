@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"api_pagamentos/config"
 	"api_pagamentos/database"
 	"api_pagamentos/models"
 	"api_pagamentos/services"
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -57,4 +59,31 @@ func CheckUser(c *gin.Context) {
 func ValidBought(c *gin.Context) {
 	database.DBCon()
 
+	var cf models.CompraFeita
+	err := c.ShouldBindJSON(&cf)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Parametro não pode ser vinculado a um JSON: " + err.Error(),
+		})
+		return
+	}
+	qry := "UPDATE personagens SET produto = ? WHERE id = ?"
+	rows, err := database.DB.Queryx(qry, cf.Produto, cf.Id)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(json.Marshal(rows))
+
+	config.ReadFile()
+	personagem := models.Personagem{}
+	for rows.Next() {
+		err = rows.StructScan(&personagem)
+	}
+	if err != nil {
+		fmt.Println("\n login39 - ", err)
+	}
+	defer rows.Close()
+	c.JSON(http.StatusOK, gin.H{
+		"token": config.TokenMercadoPago,
+	})
 }

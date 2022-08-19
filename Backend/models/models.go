@@ -32,89 +32,80 @@ type CompraFeita struct {
 	Produto string `json:"produto"`
 }
 
+type Identification struct {
+	Type   string `json:"type"`
+	Number int    `json:"number"`
+}
+type Payer struct {
+	Id             string         `json:"id"`
+	Email          string         `json:"email"`
+	Identification Identification `json:"identification"`
+	Type           string         `json:"type"`
+}
+type Metadata struct{}
+type AdditionalInfo struct{}
+type TransactionDetails struct {
+	NetReceivedAmount int     `json:"net_received_amount"`
+	TotalPaidAmount   float64 `json:"total_paid_amount"`
+	OverpaidAmount    int     `json:"overpaid_amount"`
+	InstallmentAmount int     `json:"installment_amount"`
+}
+type Card struct{}
+type Paging struct {
+	Total  int `json:"total"`
+	Limit  int `json:"limit"`
+	Offset int `json:"offset"`
+}
+
+type Results struct {
+	Id                        int                `json:"id"`
+	DateCreated               time.Time          `json:"date_created"`
+	DateApproved              time.Time          `json:"date_approved"`
+	DateLastUpdated           time.Time          `json:"date_last_updated"`
+	MoneyReleaseDate          time.Time          `json:"money_release_date"`
+	PaymentMethodId           string             `json:"payment_method_id"`
+	PaymentTypeId             string             `json:"payment_type_id"`
+	Status                    string             `json:"status"`
+	StatusDetail              string             `json:"status_detail"`
+	CurrencyId                string             `json:"currency_id"`
+	Description               string             `json:"description"`
+	CollectorId               int                `json:"collector_id"`
+	Payer                     Payer              `json:"payer"`
+	Metadata                  Metadata           `json:"metadata"`
+	AdditionalInfo            AdditionalInfo     `json:"additional_info"`
+	TransactionAmount         float64            `json:"transaction_amount"`
+	TransactionAmountRefunded int                `json:"transaction_amount_refunded"`
+	CouponAmount              int                `json:"coupon_amount"`
+	TransactionDetails        TransactionDetails `json:"transaction_details"`
+	Installments              int                `json:"installments"`
+	Card                      Card               `json:"card"`
+}
+
 type ResponseVerifica struct {
-	Results struct {
-		Id               int       `json:"id"`
-		DateCreated      time.Time `json:"date_created"`
-		DateApproved     time.Time `json:"date_approved"`
-		DateLastUpdated  time.Time `json:"date_last_updated"`
-		MoneyReleaseDate time.Time `json:"money_release_date"`
-		PaymentMethodId  string    `json:"payment_method_id"`
-		PaymentTypeId    string    `json:"payment_type_id"`
-		Status           string    `json:"status"`
-		StatusDetail     string    `json:"status_detail"`
-		CurrencyId       string    `json:"currency_id"`
-		Description      string    `json:"description"`
-		CollectorId      int       `json:"collector_id"`
-		Payer            struct {
-			Id             int    `json:"id"`
-			Email          string `json:"email"`
-			Identification struct {
-				Type   string `json:"type"`
-				Number int    `json:"number"`
-			} `json:"identification"`
-			Type string `json:"type"`
-		} `json:"payer"`
-		Metadata struct {
-		} `json:"metadata"`
-		AdditionalInfo struct {
-		} `json:"additional_info"`
-		TransactionAmount         int `json:"transaction_amount"`
-		TransactionAmountRefunded int `json:"transaction_amount_refunded"`
-		CouponAmount              int `json:"coupon_amount"`
-		TransactionDetails        struct {
-			NetReceivedAmount int `json:"net_received_amount"`
-			TotalPaidAmount   int `json:"total_paid_amount"`
-			OverpaidAmount    int `json:"overpaid_amount"`
-			InstallmentAmount int `json:"installment_amount"`
-		} `json:"transaction_details"`
-		Installments int `json:"installments"`
-		Card         struct {
-		} `json:"card"`
-	} `json:"results"`
-	Paging struct {
-		Total  int `json:"total"`
-		Limit  int `json:"limit"`
-		Offset int `json:"offset"`
-	} `json:"paging"`
+	Results []Results `json:"results"`
+	Paging  Paging    `json:"paging"`
 }
 
 type VerificarStatus struct {
-	Id               int       `json:"id"`
-	DateCreated      time.Time `json:"date_created"`
-	DateApproved     time.Time `json:"date_approved"`
-	DateLastUpdated  time.Time `json:"date_last_updated"`
-	MoneyReleaseDate time.Time `json:"money_release_date"`
-	PaymentMethodId  string    `json:"payment_method_id"`
-	PaymentTypeId    string    `json:"payment_type_id"`
-	Status           string    `json:"status"`
-	StatusDetail     string    `json:"status_detail"`
-	CurrencyId       string    `json:"currency_id"`
-	Description      string    `json:"description"`
-	CollectorId      int       `json:"collector_id"`
-	Payer            struct {
-		Id             int    `json:"id"`
-		Email          string `json:"email"`
-		Identification struct {
-			Type   string `json:"type"`
-			Number int    `json:"number"`
-		} `json:"identification"`
-		Type string `json:"type"`
-	} `json:"payer"`
-	Metadata struct {
-	} `json:"metadata"`
-	AdditionalInfo struct {
-	} `json:"additional_info"`
-	TransactionAmount         int `json:"transaction_amount"`
-	TransactionAmountRefunded int `json:"transaction_amount_refunded"`
-	CouponAmount              int `json:"coupon_amount"`
-	TransactionDetails        struct {
-		NetReceivedAmount int `json:"net_received_amount"`
-		TotalPaidAmount   int `json:"total_paid_amount"`
-		OverpaidAmount    int `json:"overpaid_amount"`
-		InstallmentAmount int `json:"installment_amount"`
-	} `json:"transaction_details"`
-	Installments int `json:"installments"`
-	Card         struct {
-	} `json:"card"`
+	Id                        int                `json:"id"`
+	DateCreated               time.Time          `json:"date_created"`
+	DateApproved              time.Time          `json:"date_approved"`
+	DateLastUpdated           time.Time          `json:"date_last_updated"`
+	MoneyReleaseDate          time.Time          `json:"money_release_date"`
+	PaymentMethodId           string             `json:"payment_method_id"`
+	PaymentTypeId             string             `json:"payment_type_id"`
+	Status                    string             `json:"status"`
+	StatusDetail              string             `json:"status_detail"`
+	CurrencyId                string             `json:"currency_id"`
+	Description               string             `json:"description"`
+	CollectorId               int                `json:"collector_id"`
+	Payer                     Payer              `json:"payer"`
+	Metadata                  Metadata           `json:"metadata"`
+	AdditionalInfo            AdditionalInfo     `json:"additional_info"`
+	TransactionAmount         float64            `json:"transaction_amount"`
+	TransactionAmountRefunded int                `json:"transaction_amount_refunded"`
+	CouponAmount              int                `json:"coupon_amount"`
+	TransactionDetails        TransactionDetails `json:"transaction_details"`
+	Installments              int                `json:"installments"`
+	Card                      Card               `json:"card"`
 }

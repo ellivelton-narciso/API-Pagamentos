@@ -6,5 +6,5 @@ import (
 
 func main() {
 	routes.HandleRequests()
-	//services.VerificaProdutos()
+
 }

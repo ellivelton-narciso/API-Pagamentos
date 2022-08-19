@@ -10,5 +10,6 @@ func HandleRequests() {
 	config.ReadFile()
 	r := gin.Default()
 	r.POST("/usuario", controllers.CheckUser)
+	r.POST("/compraFeita", controllers.ValidBought)
 	r.Run(":" + config.PortaRodando)
 }
