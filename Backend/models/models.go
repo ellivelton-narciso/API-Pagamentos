@@ -19,7 +19,6 @@ type ConfigStruct struct {
 	PortaRodando      string `json:"PortaRodando"`
 	TabelaPersonagens string `json:"TabelaPersonagens"`
 	TokenMercadoPago  string `json:"TokenMercadoPago"`
-	MinutosRodando    int    `json:"MinutosRodando"`
 }
 
 type Login struct {
