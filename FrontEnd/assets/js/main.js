@@ -99,10 +99,15 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
 
     $('#'+ idProduto +'').click(()=>{
         const idCliente = JSON.parse(localStorage.usuario).id
+        const tokenCliente = JSON.parse(local.usuario).token
         if(idCliente === null || idCliente === 0) return  logout()
         $.ajax({
             url: 'localhost:5000/compraFeita',
             method: 'POST',
+            headers: {
+                "Authorization": "Bearer "+ tokenCliente +"",
+                "Content-Type": "application/json"
+            },
             data: {
                 "id": idCliente,
                 "idProduto": idProduto
