@@ -28,23 +28,23 @@
 </head>
 <body>
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-    <div class="container-lg d-flex justify-content-end">
+    <div class="container d-flex justify-content-end">
         <li class="text-decoration-none list-unstyled">
             <a class="navbar-brand" href="#">Entrar</a>
         </li>
     </div>
 </nav>
-<div class="container-lg">
-    <div class="row d-flex justify-content-lg-center" style="margin-top: 17vh">
-        <div class="col-lg-6">
-            <div class="card">
-                <div id="campoInput" class="row mt-lg-5 mb-lg-5 d-flex justify-content-lg-center">
-                    <div class="col-lg-10">
+<div class="container">
+    <div class="row d-flex justify-content-center" style="margin-top: 17vh">
+        <div class="col-md-6">
+            <div class="card card-login">
+                <div id="campoInput" class="row mt-5 mb-5 d-flex ms-md-2">
+                    <div class="col-lg-10 col-md-9 col-sm-12">
                         <label for="nomePersonagem"></label>
-                        <input type="text" id="nomePersonagem" class="form-control text-center" placeholder="Nome do Personagem (Nome_Sobrenome)">
+                        <input type="text" id="nomePersonagem" class="form-control text-center" placeholder="Nome do Personagem (Nome_Sobrenome)" style="opacity: 0.8">
                     </div>
-                    <div class="col-lg-1 mt-lg-4">
-                        <div class="col-lg-3">
+                    <div class="col-md-1 mt-4">
+                        <div class="col-3">
                             <button id="enviarNome" class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
@@ -55,8 +55,15 @@
 </div>
 </body>
 </html>
-
 <script src="vendor/Jquery/jquery-3.6.0.min.js"></script>
 <script src="vendor/Bootstrap5/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/08478c52c1.js" crossorigin="anonymous"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    if (window.screen.width < 768) {
+        $('#enviarNome i').remove()
+        $('#enviarNome').html('Entrar')
+        $('#enviarNome').parent().removeAttr("class")
+        $('#enviarNome').parent().parent().addClass('col-sm-12 justify-content-center d-flex')
+    }
+</script>

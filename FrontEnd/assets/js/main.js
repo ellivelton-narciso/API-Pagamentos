@@ -69,7 +69,7 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
     text-decoration: none;
 }
     </style>
-    <div id="`+ idProduto +`-`+ idProduto +`" class="col-lg-3 cardProduto mb-lg-5">
+    <div id="`+ idProduto +`-`+ idProduto +`" class="col-lg-3 col-md-4 col-sm-6 cardProduto mb-5">
         <div class="card" id="carProduto_titulos-`+ idProduto +`" style="background-color: #818181; color: #ffffff; border: none">
           <div class="row" style="padding: 30px 20px">
             <h5 class="tituloProduto" style="font-size: 0.8rem">`+ nomeProduto +`</h5>
@@ -78,13 +78,13 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
         </div>
         <div class="card" id="carProduto_beneficios-`+ idProduto +`" style="border: none">
           <div class="row" style="padding: 30px">
-            <div class="col-lg-10">
+            <div class="col-10">
               <div class="row">
                 <ul id="item_beneficios-`+ idProduto+`">
                 </ul>
               </div>
             </div>
-            <div class="col-lg-2" style="margin-left: 25%">
+            <div class="col-2" style="margin-left: 25%">
               <button id="`+ idProduto +`" class="btn btn-outline-danger botaoCompraProduto" style="font-size: 0.7rem"><i class="fa-solid fa-cloud-arrow-down d-inline me-1"></i>Adquirir</button>
             </div>
           </div>
