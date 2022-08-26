@@ -3,6 +3,7 @@ package server
 import (
 	"api_pagamentos/config"
 	"api_pagamentos/routes"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"log"
 )
@@ -22,6 +23,8 @@ func NewServer() Server {
 
 func (s *Server) Run() {
 	router := routes.ConfigRoutes(s.server)
+
+	router.Use(cors.Default())
 
 	log.Printf("Server running at port: %v", s.port)
 	log.Fatal(router.Run(":" + s.port))

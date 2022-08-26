@@ -53,7 +53,7 @@ func VerificaProdutos() {
 
 		if compraFeita.Produto != "" {
 			//url := "https://api.mercadopago.com/v1/payments/search?external_reference=achei"
-			url := "https://api.mercadopago.com/v1/payments/search?external_reference=" + compraFeita.Produto + "-" + strconv.Itoa(compraFeita.Id)
+			url := "https://api.mercadopago.com/v1/payments/search?payment_method_id=pix&external_reference=" + compraFeita.Produto + "-" + strconv.Itoa(compraFeita.Id)
 			method := "GET"
 
 			payload := strings.NewReader(``)
