@@ -70,7 +70,7 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
 }
     </style>
     <div id="`+ idProduto +`-`+ idProduto +`" class="col-lg-3 col-md-4 col-sm-6 cardProduto mb-5">
-        <div class="card" id="carProduto_titulos-`+ idProduto +`" style="background-color: #818181; color: #ffffff; border: none">
+        <div class="card" id="cardProduto_titulos-`+ idProduto +`" style="background-color: #818181; color: #ffffff; border: none">
           <div class="row" style="padding: 30px 20px">
             <h5 class="tituloProduto" style="font-size: 0.8rem">`+ nomeProduto +`</h5>
             <h3 class="precoProduto">R$ `+ precoProduto +`</h3>
@@ -99,7 +99,7 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
 
     $('#'+ idProduto +'').click(()=>{
         const idCliente = JSON.parse(localStorage.usuario).id
-        const tokenCliente = JSON.parse(local.usuario).token
+        const tokenCliente = JSON.parse(localStorage.usuario).token
         if(idCliente === null || idCliente === 0) return  logout()
         $.ajax({
             url: 'localhost:5000/compraFeita',
@@ -118,34 +118,37 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
             success: function (data) {
                 const tokenMP = data.token
                 $.ajax({
-                    url: "https://api.mercadopago.com/checkout/preferences",
+                    url: "https://api.mercadopago.com/v1/payments",
                     method: "POST",
                     headers: {
                         "Authorization": "Bearer "+ tokenMP +"",
                         "Content-Type": "application/json"
                     },
                     data: JSON.stringify({
-                        "items": [
-                            {
-                                "id": idProduto,
-                                "title": nomeProduto,
-                                "quantity": 1,
-                                "unit_price": parseInt(precoProduto.replace(',', '.'))
-                            }
-                        ],
+                        "transaction_amount": parseInt(precoProduto.replace(',', '.')),
+                        "description": nomeProduto,
+                        "payment_method_id": "pix",
                         "payer": {
+                            "email": "teste@teste.com",
                             "first_name": "",
                             "last_name": "",
-                            "phone": {
-                                "area_code": "",
+                            "identification": {
+                                "type": "CPF",
                                 "number": ""
                             },
-                            "address": {}
+                            "address": {
+                                "zip_code": "",
+                                "street_name": "",
+                                "street_number": "",
+                                "neighborhood": "",
+                                "city": "",
+                                "federal_unit": ""
+                            }
                         },
-                        "externel_reference": idProduto+"-"+idCliente
+                        "external_reference": idProduto +"-"+ idCliente
                     }),
                     success: function (res){
-                        location.assign(res.init_point)
+                        location.assign(res.point_of_interaction.transaction_data.ticket_url)
                     },
                     error: function () {
 
@@ -153,8 +156,6 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
                 });
             }
         })
-
-
     })
 }
 
