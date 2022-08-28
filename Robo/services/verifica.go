@@ -100,7 +100,7 @@ func VerificaProdutos() {
 					return
 				}
 
-				if s.Status == "pending" {
+				if s.Status == "approved" {
 					var idCliente = compraFeita.Id
 					qryIdentifica := "SELECT nome FROM " + config.TabelaPersonagens + " WHERE id = ?"
 					_, err = database.DB.Queryx(qryIdentifica, idCliente)
