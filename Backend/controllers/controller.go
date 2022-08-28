@@ -55,8 +55,6 @@ func CheckUser(c *gin.Context) {
 }
 
 func ValidBought(c *gin.Context) {
-	token := services.TokenBearer(c.GetHeader("Authorization"))
-	fmt.Println(token)
 	perfilToken := models.CompraFeita{}
 	err := c.ShouldBindJSON(&perfilToken)
 	if err != nil {
@@ -81,7 +79,7 @@ func ValidBought(c *gin.Context) {
 		fmt.Println("\n login39 - ", err)
 	}
 	defer rows.Close()
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(200, gin.H{
 		"token": config.TokenMercadoPago,
 	})
 
