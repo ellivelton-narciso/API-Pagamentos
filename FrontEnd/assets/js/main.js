@@ -6,24 +6,24 @@ $('#enviarNome').click(()=>{
         $('#nomePersonagem').addClass('is-invalid')
     } if(nomePersonagem.split('_').length !== 2) {
         $('#nomePersonagem').addClass('is-invalid')
-        const alertaNomeErrado = `<div class="mt-lg-3 col-lg-8 alert alert-danger alert-dismissible fade show" role="alert">
+        const alertaNomeErrado = `<div class="mt-lg-3 col-lg-10 alert alert-danger alert-dismissible fade show" role="alert">
             O nome deve estar no formato Nome_Sobrenome.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`
         $(alertaNomeErrado).clone().appendTo('#campoInput')
     } else if(!$('#nomePersonagem').hasClass('is-invalid')){
         $.ajax({
-            url: 'localhost:5000/usuario',
+            url: 'http://localhost:5000/usuario', // Substitua localhost por
             method: 'POST',
-            data: {
+            data: JSON.stringify({
                 "nome": nomePersonagem
-            },
+            }),
             beforeSend: function () {
 
             },
             success: function (res) {
                 if(res.id === 0) {
-                    const alertaNomeErrado = `<div class="mt-lg-3 col-lg-8 alert alert-danger alert-dismissible fade show" role="alert">
+                    const alertaNomeErrado = `<div class="mt-lg-3 col-lg-10 alert alert-danger alert-dismissible fade show" role="alert">
                         Usuario não encontrado no banco de dados.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`
@@ -102,19 +102,12 @@ function geraProduto(idProduto, nomeProduto, precoProduto, beneficios) {
         const tokenCliente = JSON.parse(localStorage.usuario).token
         if(idCliente === null || idCliente === 0) return  logout()
         $.ajax({
-            url: 'localhost:5000/compraFeita',
+            url: 'http://localhost:5000/compraFeita',
             method: 'POST',
-            headers: {
-                "Authorization": "Bearer "+ tokenCliente +"",
-                "Content-Type": "application/json"
-            },
-            data: {
-                "id": idCliente,
-                "idProduto": idProduto
-            },
-            beforeSend: function () {
-                // loading
-            },
+            data: JSON.stringify({
+                "id": parseInt(idCliente),
+                "produto": idProduto
+            }),
             success: function (data) {
                 const tokenMP = data.token
                 $.ajax({
